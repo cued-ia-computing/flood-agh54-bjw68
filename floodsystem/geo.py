@@ -8,6 +8,8 @@ geographical data.
 
 from .utils import sorted_by_key  # noqa
 import plotly.express as px
+import pandas as pd
+import geopandas
 
 
 def rivers_with_station(stations):
@@ -97,12 +99,23 @@ def rivers_by_station_number(stations, N):
     return top_N_rivers
         
 def map_station(stations):
-    coordinates = []
+    coordx = []
+    coordy = []
+    name = []
     for station in stations:
-        station_loc = (station.name, station.coord)
-        coordinates.append(station_loc)
+        coordx.append(station.coord[0])
+        coordy.append(station.coord[1])
+        name.append(station.name)
     
-    return coordinates
+    df = pd.DataFrame(
+    {'City': name,
+     'Latitude': coordx,
+     'Longitude': coordy})
 
 
-    
+    gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.Longitude, df.Latitude))
+    fig = px.scatter_geo(gdf,
+                    lat=gdf.geometry.y,
+                    lon=gdf.geometry.x,
+                    hover_name="City")
+    fig.show()
