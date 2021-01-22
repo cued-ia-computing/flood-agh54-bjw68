@@ -1,4 +1,5 @@
 from floodsystem.geo import rivers_with_station
+from floodsystem.geo import stations_by_river
 from floodsystem.stationdata import build_station_list
 
 def run():
@@ -12,11 +13,15 @@ def run():
 
     # Display data from 10 rivers:
     river_display = rivers[:10]
-    print(river_display)
+    print('The ten first rivers are {}' .format(river_display))
 
     # Create River dictionary
     river_stations = stations_by_river(stations)
-    print(river_stations)
+
+    # Display desired rivers
+    print('The stations on the River Aire are {}'.format(river_stations['River Aire']))
+    print('The stations on the River Cam are {}'.format(river_stations['River Cam']))
+    print('The stations on the River Thames are {}'.format(river_stations['River Thames']))
 
 
 if __name__ == "__main__":

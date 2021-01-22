@@ -40,8 +40,7 @@ def stations_by_river(stations):
         # If the river value of a station matches the current river, add it to the lisr
         for station in stations:
             if station.river == river:
-                river_list.append(station)
+                river_list.append(station.name)
         river_list.sort()
         rivers_dict[river] = river_list
-
     return rivers_dict
