@@ -47,32 +47,50 @@ def stations_by_river(stations):
 
 def rivers_by_station_number(stations, N):
     """Create a dictionary of stations and corresponding number"""
+
+    # Initialise station list and container for all rivers
     river_stations = stations_by_river(stations)
     river_number = []
+
+    # Find number for all rivers
     for river in river_stations:
+
+        # Sum number of stations on each river
         total = 0
         for station in river_stations[river]:
             total += 1
+
+        # Create a container for the river and its value
         river_value = (river, total)
         river_number.append(river_value)
+
+    # Sort total list by number in reverse order
     river_num_sorted = sorted(river_number, key=lambda x: x[1], reverse=True)
 
+
+    # Iterate through list of rivers
     count = 0
     top_N_rivers = []
+
+    # Break when desired value is reached
     while count < N:
+
+        # Add top river
         if count == 0:
             top_N_rivers.append(river_num_sorted[0])
             count += 1
+
+        # Add river and to the count provided the entry is smaller than the last
         elif (river_num_sorted[count][1]) < (river_num_sorted[count-1][1]):
             top_N_rivers.append(river_num_sorted[count])
             count += 1
-        else:
-            initial_river_stations = river_num_sorted[count][1]
-            num = count
-            while river_num_sorted[num][1] == initial_river_stations:
-                top_N_rivers.append(river_num_sorted[num])
-                num += 1
-            count += 1
 
+        # Add river when it has the same as the previous number, but add to N as well to preserve distance
+        else:
+            top_N_rivers.append(river_num_sorted[count])
+            count += 1
+            N += 1
+
+    # Return list
     return top_N_rivers
         
