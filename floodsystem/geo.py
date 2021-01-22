@@ -15,4 +15,5 @@ def rivers_with_station(stations):
             pass
         else:
             rivers.append(station.river)
+    rivers.sort()
     return rivers
