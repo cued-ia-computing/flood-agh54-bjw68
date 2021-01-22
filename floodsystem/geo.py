@@ -7,6 +7,8 @@ geographical data.
 """
 
 from .utils import sorted_by_key  # noqa
+import plotly.express as px
+
 
 def rivers_with_station(stations):
     """Created a sorted list of Rivers with stations on them"""
@@ -94,3 +96,13 @@ def rivers_by_station_number(stations, N):
     # Return list
     return top_N_rivers
         
+def map_station(stations):
+    coordinates = []
+    for station in stations:
+        station_loc = (station.name, station.coord)
+        coordinates.append(station_loc)
+    
+    return coordinates
+
+
+    
