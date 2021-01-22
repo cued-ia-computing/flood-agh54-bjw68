@@ -15,7 +15,8 @@ def run():
     print(river_display)
 
     # Create River dictionary
-    river_stations = stations
+    river_stations = stations_by_river(stations)
+    print(river_stations)
 
 
 if __name__ == "__main__":
