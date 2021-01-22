@@ -6,7 +6,7 @@ def run():
 
     stations = build_station_list()
 
-    river_num = rivers_by_station_number(stations, 2)
+    river_num = rivers_by_station_number(stations, 15)
     print(river_num)
 
 

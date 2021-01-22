@@ -63,11 +63,16 @@ def rivers_by_station_number(stations, N):
         if count == 0:
             top_N_rivers.append(river_num_sorted[0])
             count += 1
-        elif (river_num_sorted[count][1]) > (river_num_sorted[count-1][1]):
+        elif (river_num_sorted[count][1]) < (river_num_sorted[count-1][1]):
             top_N_rivers.append(river_num_sorted[count])
             count += 1
         else:
-            break
+            initial_river_stations = river_num_sorted[count][1]
+            num = count
+            while river_num_sorted[num][1] == initial_river_stations:
+                top_N_rivers.append(river_num_sorted[num])
+                num += 1
+            count += 1
 
-    return river_num_sorted
+    return top_N_rivers
         
