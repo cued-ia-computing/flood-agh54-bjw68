@@ -14,6 +14,9 @@ def run():
     river_display = rivers[:10]
     print(river_display)
 
+    # Create River dictionary
+    river_stations = stations
+
 
 if __name__ == "__main__":
     print("*** Task 1D: CUED Part IA Flood Warning System ***")
