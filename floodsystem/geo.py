@@ -44,3 +44,30 @@ def stations_by_river(stations):
         river_list.sort()
         rivers_dict[river] = river_list
     return rivers_dict
+
+def rivers_by_station_number(stations, N):
+    """Create a dictionary of stations and corresponding number"""
+    river_stations = stations_by_river(stations)
+    river_number = []
+    for river in river_stations:
+        total = 0
+        for station in river_stations[river]:
+            total += 1
+        river_value = (river, total)
+        river_number.append(river_value)
+    river_num_sorted = sorted(river_number, key=lambda x: x[1], reverse=True)
+
+    count = 0
+    top_N_rivers = []
+    while count < N:
+        if count == 0:
+            top_N_rivers.append(river_num_sorted[0])
+            count += 1
+        elif (river_num_sorted[count][1]) > (river_num_sorted[count-1][1]):
+            top_N_rivers.append(river_num_sorted[count])
+            count += 1
+        else:
+            break
+
+    return river_num_sorted
+        
