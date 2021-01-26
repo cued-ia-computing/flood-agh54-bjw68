@@ -10,6 +10,7 @@ from .utils import sorted_by_key  # noqa
 import plotly.express as px
 import pandas as pd
 import geopandas
+from haversine import haversine, Unit
 
 
 def rivers_with_station(stations):
@@ -119,3 +120,37 @@ def map_station(stations):
                     lon=gdf.geometry.x,
                     hover_name="City")
     fig.show()
+
+def stations_by_distance(stations, p):
+    """Create a list of stations ordered by distance from a specified location"""
+
+    # Create list
+    distances = []
+
+    # Calculate the distance from the point to each station use the haversine library function and add to list
+    for station in stations:
+        distance = haversine(station.coord,p)
+        distances.append((station,distance))
+    
+    # Sort by distance and return this list
+    distances_sorted = sorted_by_key(distances,1)
+    return distances_sorted
+
+def stations_within_radius(stations, centre, r):
+    """Create a list of stations within a certain radius of a specified location"""
+
+    # Create list
+    close_stations = []
+
+    # Adds valid stations to the list
+    for station in stations:
+        # works out distance of station from centre
+        distance = haversine(station.coord,centre)
+        if distance < r:
+            close_stations.append(station)
+        else:
+            pass
+    
+    # Sort by distance and return this list
+    stations_sorted = close_stations.sort()
+    return stations_sorted
