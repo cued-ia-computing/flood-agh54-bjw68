@@ -3,6 +3,8 @@ from floodsystem.station import MonitoringStation
 from floodsystem.station import sampledata
 from floodsystem.geo import stations_by_river
 from floodsystem.geo import rivers_by_station_number
+from floodsystem.geo import map_station
+from floodsystem.geo import position_plotter
 
 """Unit test for the geo module"""
 
@@ -50,7 +52,27 @@ def test_rivers_by_station_number():
 
     assert rivers != None
 
+def test_map_station():
+    test_data = sampledata()
+    pos = map_station(test_data)
+    
+    for coord in pos.geometry.x:
+        assert (type(coord)) == float
+    for coord in pos.geometry.y:
+        assert (type(coord)) == float
+    
+    assert len(pos.geometry.x) == len(pos.geometry.y) and len(pos.geometry.x) <= len(test_data)
+    assert len(pos.geometry.x) == len(pos['City'])
+
+    for city in pos['City']:    
+        assert city != None
+        assert type(city) == str
+
+def test_position_plotter():
+    pass
+
 
 test_rivers_with_station()
 test_stations_by_river()
 test_rivers_by_station_number()
+test_map_station()

@@ -117,11 +117,14 @@ def map_station(stations):
      'Latitude': coordx,
      'Longitude': coordy})
 
-
     gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.Longitude, df.Latitude))
-    fig = px.scatter_geo(gdf,
-                    lat=gdf.geometry.y,
-                    lon=gdf.geometry.x,
+
+    return gdf
+
+def position_plotter(geodf):
+    fig = px.scatter_geo(geodf,
+                    lat=geodf.geometry.y,
+                    lon=geodf.geometry.x,
                     hover_name="City", )
     fig.update_geos(fitbounds="locations")
     fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
