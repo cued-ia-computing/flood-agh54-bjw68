@@ -80,7 +80,7 @@ def rivers_by_station_number(stations, N):
     top_N_rivers = []
 
     # Break when desired value is reached
-    while count < N:
+    while count < N and count < len(river_num_sorted):
 
         # Add top river
         if count == 0:

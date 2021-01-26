@@ -6,7 +6,6 @@ def run():
 
     # Create station list
     stations = build_station_list()
-    print(stations)
 
     # Obtain the N rivers with most stations
     river_num = rivers_by_station_number(stations, 9)

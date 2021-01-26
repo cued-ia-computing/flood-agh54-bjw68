@@ -75,5 +75,12 @@ def sampledata():
                 typical_range=(-0.02, 0.463),
                 river='Brough Beck',
                 town='Catterick FAS Brough Park')
-    stationlist = [station1, station2, station3, station4, station5, station1]
+    station6 = MonitoringStation(station_id='Birkwood',
+                measure_id='http://environment.data.gov.uk/flood-monitoring/id/stations/45188',
+                label='Birkwood',
+                coord=(54.374006, -1.650387),
+                typical_range=(-0.02, 0.463),
+                river='Brough Beck',
+                town='Birkwood')
+    stationlist = [station1, station2, station3, station4, station5, station6, station1]
     return stationlist

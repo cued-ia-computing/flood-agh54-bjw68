@@ -2,7 +2,7 @@ from floodsystem.geo import rivers_with_station
 from floodsystem.station import MonitoringStation
 from floodsystem.station import sampledata
 from floodsystem.geo import stations_by_river
-import floodsystem.geo import rivers_by_station_number
+from floodsystem.geo import rivers_by_station_number
 
 """Unit test for the geo module"""
 
@@ -33,10 +33,24 @@ def test_stations_by_river():
 
     assert len(rivers) < len(test_data)
 
-def rivers_by_station_number():
-    pass
+def test_rivers_by_station_number():
+    testvalue = 3
+    test_data = sampledata()
+    rivers = rivers_by_station_number(test_data, testvalue)
+    
+    count = 0
+    for river in rivers:
+        assert type(river) == tuple
+        assert type(river[1]) == int
+        assert river[1] != 0
+        if count > 0:
+            assert river[count] > river[count-1]
+    
+    assert len(rivers) >= testvalue
 
+    assert rivers != None
 
 
 test_rivers_with_station()
 test_stations_by_river()
+test_rivers_by_station_number()
