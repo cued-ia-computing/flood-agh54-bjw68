@@ -41,10 +41,13 @@ def stations_by_river(stations):
     for river in rivers:
         river_list = []
         
-        # If the river value of a station matches the current river, add it to the lisr
+        # If the river value of a station matches the current river, add it to the list
+        checked_stations = []
         for station in stations:
-            if station.river == river:
-                river_list.append(station.name)
+            if station.name not in checked_stations:
+                if station.river == river:
+                    river_list.append(station.name)
+                checked_stations.append(station.name)
         river_list.sort()
         rivers_dict[river] = river_list
     return rivers_dict
