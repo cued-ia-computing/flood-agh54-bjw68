@@ -8,8 +8,8 @@ geographical data.
 
 from .utils import sorted_by_key  # noqa
 import plotly.express as px
-import pandas as pd
 import geopandas
+import pandas as pd
 from haversine import haversine, Unit
 
 
@@ -42,10 +42,13 @@ def stations_by_river(stations):
     for river in rivers:
         river_list = []
         
-        # If the river value of a station matches the current river, add it to the lisr
+        # If the river value of a station matches the current river, add it to the list
+        checked_stations = []
         for station in stations:
-            if station.river == river:
-                river_list.append(station.name)
+            if station.name not in checked_stations:
+                if station.river == river:
+                    river_list.append(station.name)
+                checked_stations.append(station.name)
         river_list.sort()
         rivers_dict[river] = river_list
     return rivers_dict
@@ -78,7 +81,7 @@ def rivers_by_station_number(stations, N):
     top_N_rivers = []
 
     # Break when desired value is reached
-    while count < N:
+    while count < N and count < len(river_num_sorted):
 
         # Add top river
         if count == 0:
@@ -98,21 +101,50 @@ def rivers_by_station_number(stations, N):
 
     # Return list
     return top_N_rivers
-        
+
+
 def map_station(stations):
+    """Function to plot the locations of the pumping stations"""
+
+    #Create coordiante lists
     coordx = []
     coordy = []
     name = []
+
+    # Stores coordinate data per station
     for station in stations:
         coordx.append(station.coord[0])
         coordy.append(station.coord[1])
         name.append(station.name)
     
+    # Creates a dataframe of names and coordinates
     df = pd.DataFrame(
     {'City': name,
      'Latitude': coordx,
      'Longitude': coordy})
 
+    # Convert to geo-dataframe storage type for access
+    gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.Longitude, df.Latitude))
+
+    # Output dataframe
+    return gdf
+
+
+def position_plotter(geodf):
+    # Creates a map image with points plotted at coordiantes, labelled with their name
+    fig = px.scatter_geo(geodf,
+                    lat=geodf.geometry.y,
+                    lon=geodf.geometry.x,
+                    hover_name="City", )
+
+    # Fits the view around the input data
+    fig.update_geos(fitbounds="locations")
+
+    # Modifies plot window and margins
+    fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
+
+    # Plots the result
+    fig.show()
 
     gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.Longitude, df.Latitude))
     fig = px.scatter_geo(gdf,
