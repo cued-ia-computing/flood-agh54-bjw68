@@ -105,5 +105,3 @@ def test_position_plotter():
     pos = map_station(test_data)
     # Checks we an call the plotter
     plot = position_plotter(pos)
-
-test_position_plotter()
