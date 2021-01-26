@@ -104,30 +104,45 @@ def rivers_by_station_number(stations, N):
 
 def map_station(stations):
     """Function to plot the locations of the pumping stations"""
+
+    #Create coordiante lists
     coordx = []
     coordy = []
     name = []
+
+    # Stores coordinate data per station
     for station in stations:
         coordx.append(station.coord[0])
         coordy.append(station.coord[1])
         name.append(station.name)
     
+    # Creates a dataframe of names and coordinates
     df = pd.DataFrame(
     {'City': name,
      'Latitude': coordx,
      'Longitude': coordy})
 
+    # Convert to geo-dataframe storage type for access
     gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.Longitude, df.Latitude))
 
+    # Output dataframe
     return gdf
 
+
 def position_plotter(geodf):
+    # Creates a map image with points plotted at coordiantes, labelled with their name
     fig = px.scatter_geo(geodf,
                     lat=geodf.geometry.y,
                     lon=geodf.geometry.x,
                     hover_name="City", )
+
+    # Fits the view around the input data
     fig.update_geos(fitbounds="locations")
+
+    # Modifies plot window and margins
     fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
+
+    # Plots the result
     fig.show()
 
     
