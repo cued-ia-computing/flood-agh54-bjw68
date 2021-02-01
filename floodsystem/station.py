@@ -67,14 +67,14 @@ def sampledata():
                 measure_id='http://environment.data.gov.uk/flood-monitoring/id/stations/F2802',
                 label='Loftsome Bridge',
                 coord=(53.759195, -0.936675),
-                typical_range=(41.225, 42.9),
+                typical_range=(41.225, -42.9),
                 river='River Derwent',
                 town='Loftsome Bridge')
     station4 = MonitoringStation(station_id='Upton',
                 measure_id='http://environment.data.gov.uk/flood-monitoring/id/stations/45188',
                 label='Upton',
                 coord=(51.050366, -3.444914),
-                typical_range=(0.084, 0.85),
+                typical_range=(0.084, -0.85),
                 river='River Haddeo',
                 town='Upton')
     station5 = MonitoringStation(station_id='Catterick Brough Park',

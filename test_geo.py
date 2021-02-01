@@ -5,6 +5,8 @@ from floodsystem.geo import stations_by_river
 from floodsystem.geo import rivers_by_station_number
 from floodsystem.geo import map_station
 from floodsystem.geo import position_plotter
+from floodsystem.geo import stations_by_distance
+from floodsystem.geo import stations_within_radius
 
 """Unit test for the geo module"""
 
@@ -105,3 +107,44 @@ def test_position_plotter():
     pos = map_station(test_data)
     # Checks we an call the plotter
     plot = position_plotter(pos)
+
+def test_stations_by_distance():
+    test_data = sampledata()
+    test_value = 52.2053, 0.1218
+    stations = stations_by_distance(test_data, test_value)
+
+    # Checks the list isn't empty
+    assert len(stations) != 0
+
+    for station in stations:
+        # Checks that the list stores tuples, and that the tuples have the right type of value in each entry
+        assert type(station) == tuple
+        assert type(station[0]) == str
+        assert type(station[1]) == float
+
+        # Checks distance is positive
+        assert station[1] > 0
+
+    # Checks sort
+    for i in range(len(stations)-1):
+        assert stations[i][1] < stations[i+1][1]
+    
+    # Checks the duplicate hasn't been inclueded twice
+    assert len(stations) < len(test_data)
+
+def test_stations_within_radius():
+    test_data = sampledata()
+    test_value1 = 52.2053, 0.1218
+    test_value2 = 250
+    stations = stations_within_radius(test_data, test_value1, test_value2)
+
+    for station in stations:
+        # Checks that the list stores strings
+        assert type(station) == str
+
+    # Checks sort
+    test_sorted = sorted(stations)
+    assert test_sorted == stations
+    
+    # Checks the duplicate hasn't been inclueded twice
+    assert len(stations) < len(test_data)

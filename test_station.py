@@ -4,6 +4,20 @@
 """Unit test for the station module"""
 
 from floodsystem.station import MonitoringStation
+from floodsystem.station import inconsistent_typical_range_stations
+from floodsystem.station import sampledata
+
+def test_inconsistent_typical_range_stations():
+    test_data = sampledata()
+    stations = inconsistent_typical_range_stations(test_data)
+    manual_answer = ['Loftson Bridge', 'Upton']
+
+    for station in stations:
+        assert type(station) == str
+    
+    assert stations == manual_answer
+    
+
 
 
 def test_create_monitoring_station():
