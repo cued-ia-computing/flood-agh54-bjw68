@@ -127,7 +127,7 @@ def test_stations_by_distance():
 
     # Checks sort
     for i in range(len(stations)-1):
-        assert stations[i][1] < stations[i+1][1]
+        assert stations[i][1] <= stations[i+1][1]
     
     # Checks the duplicate hasn't been inclueded twice
     assert len(stations) < len(test_data)

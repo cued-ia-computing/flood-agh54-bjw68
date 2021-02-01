@@ -161,10 +161,11 @@ def stations_by_distance(stations, p):
 
     # Calculate the distance from the point to each station use the haversine library function and add to list
     for station in stations:
-        if station in distances:
+        distance = haversine(station.coord,p)
+        data = (station.name, distance)
+        if data in distances:
             pass
         else:
-            distance = haversine(station.coord,p)
             distances.append((station.name,distance))
     
     # Sort by distance and return this list
@@ -179,7 +180,7 @@ def stations_within_radius(stations, centre, r):
 
     # Adds valid stations to the list
     for station in stations:
-        if station in close_stations:
+        if station.name in close_stations:
             pass
         else:
             # works out distance of station from centre

@@ -10,7 +10,7 @@ from floodsystem.station import sampledata
 def test_inconsistent_typical_range_stations():
     test_data = sampledata()
     stations = inconsistent_typical_range_stations(test_data)
-    manual_answer = ['Loftson Bridge', 'Upton']
+    manual_answer = ['Loftsome Bridge', 'Upton']
 
     for station in stations:
         assert type(station) == str
