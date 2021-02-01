@@ -39,6 +39,15 @@ class MonitoringStation:
         d += "   typical range: {}".format(self.typical_range)
         return d
 
+    def typical_range_consistent(self):
+        if self.typical_range == None:
+            return False
+        elif (self.typical_range[0] == None) or (self.typical_range[1] == None) or self.typical_range[0] > self.typical_range[1]:
+            return False
+        else:
+            return True
+            
+
 def sampledata():
     station1 = MonitoringStation(station_id='Leeds Killingbeck Dam',
                 measure_id='http://environment.data.gov.uk/flood-monitoring/id/stations/L17014',
@@ -84,3 +93,13 @@ def sampledata():
                 town='Birkwood')
     stationlist = [station1, station2, station3, station4, station5, station6, station1]
     return stationlist
+
+def inconsistent_typical_range_stations(stations):
+    inconsistent = []
+    for station in stations:
+        if station.typical_range_consistent() == False:
+            inconsistent.append(station.name)
+    else:
+        pass
+
+    return inconsistent
