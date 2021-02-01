@@ -146,13 +146,6 @@ def position_plotter(geodf):
     # Plots the result
     fig.show()
 
-    gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.Longitude, df.Latitude))
-    fig = px.scatter_geo(gdf,
-                    lat=gdf.geometry.y,
-                    lon=gdf.geometry.x,
-                    hover_name="City")
-    fig.show()
-
 def stations_by_distance(stations, p):
     """Create a list of stations ordered by distance from a specified location"""
 
