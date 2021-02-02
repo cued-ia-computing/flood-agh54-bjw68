@@ -5,28 +5,46 @@ import numpy as np
 
 
 def current_highest_stations(stations, number):
+    """Output list of the n stations with the current highest water level, including that water level"""
+
+    #Create list of highest stations and get current levels
     highest_stations = []
     update_water_levels(stations)
+
     for station in stations:
-        if station.latest_level != None:
+        #If the station has a valid water level, add tuple of name and water level
+        if station.latest_level != None and station.latest_level < 1000:
             highest_stations.append((station, station.latest_level))
     
-
+    #Sort the list by water level
     highest_stations_sort = sorted(highest_stations, key=lambda x: x[1], reverse=True)
+
+    #Only output the desired first n stations
     output = highest_stations_sort[0:number]
     return output
 
+
 def polyfit(dates, levels, p):
+    """Output polynomial plot that is fitted to the historic water level"""
+
+
+    #Convert the date into a number and add to new dates list
     dates_num = []
     for date in dates:
         dates_num.append(matplotlib.dates.date2num(date))
 
+    #Find polynomial coefficents using shifted dates, historic water levels and desired polynomial order
     p_coeff = np.polyfit(dates_num - dates_num[0], levels, p)
+
+    #Creates polynomial using the produced coefficient
     poly = np.poly1d(p_coeff)
+
+    #Create a new list of date spaces for plotting
     x1 = np.linspace(dates_num[0], dates_num[-1], 30)
 
-    
+    #Plot the polynomial fit, calculated at shifted time values, against the time values
     plt.plot(x1, poly(x1 - dates_num[0]))
     plt.tight_layout()
 
+    #Return plot to be plotted
     return plt
