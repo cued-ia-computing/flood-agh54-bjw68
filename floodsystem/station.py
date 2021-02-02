@@ -95,11 +95,17 @@ def sampledata():
     return stationlist
 
 def inconsistent_typical_range_stations(stations):
+
+    # Creates an empty list
     inconsistent = []
+
+    # Iterates through stations and finds inconsistent data using function
     for station in stations:
         if station.typical_range_consistent() == False:
             inconsistent.append(station.name)
     else:
+        # Passes consistent data
         pass
 
+    # Returns list of stations with inconsistent data
     return inconsistent

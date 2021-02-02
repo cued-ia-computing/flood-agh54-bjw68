@@ -12,13 +12,13 @@ def test_inconsistent_typical_range_stations():
     stations = inconsistent_typical_range_stations(test_data)
     manual_answer = ['Loftsome Bridge', 'Upton']
 
+    # Checks the list entrys are strings
     for station in stations:
         assert type(station) == str
     
+    # Checks that the data function gets the same answer as a manual test
     assert stations == manual_answer
     
-
-
 
 def test_create_monitoring_station():
 
