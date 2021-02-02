@@ -53,7 +53,7 @@ def sampledata():
                 measure_id='http://environment.data.gov.uk/flood-monitoring/id/stations/L17014',
                 label='Leeds Killingbeck Dam',
                 coord=(53.807923, -1.487022),
-                typical_range=(1.03, 1.306),
+                typical_range=(1.03, -1.306),
                 river='Wyke Beck',
                 town='Leeds Killingbeck Dam')
     station2 = MonitoringStation(station_id='Scurf Dyke',
@@ -95,11 +95,21 @@ def sampledata():
     return stationlist
 
 def inconsistent_typical_range_stations(stations):
-    inconsistent = []
-    for station in stations:
-        if station.typical_range_consistent() == False:
-            inconsistent.append(station.name)
-    else:
-        pass
 
+    # Creates an empty list
+    inconsistent = []
+
+    for station in stations:
+        # Ensures duplicates are not added twice
+        if station.name in inconsistent:
+            pass
+        else:
+            # Iterates through stations and finds inconsistent data using function
+            if station.typical_range_consistent() == False:
+                inconsistent.append(station.name)
+            else:
+                # Passes consistent data
+                pass
+
+    # Returns list of stations with inconsistent data
     return inconsistent
