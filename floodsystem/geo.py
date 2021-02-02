@@ -118,9 +118,10 @@ def map_station(stations):
         coordy.append(station.coord[1])
         name.append(station.name)
     
+    #Get the respective colours for our station list
     colour = flow_range(stations)
 
-    # Creates a dataframe of names and coordinates
+    # Creates a dataframe of names, coordinates and colours
     df = pd.DataFrame(
     {'City': name,
      'Colour': colour,
@@ -139,6 +140,8 @@ def position_plotter(geodf):
     fig = px.scatter_geo(geodf,
                     lat=geodf.geometry.y,
                     lon=geodf.geometry.x,
+
+                    #Set the label as station name, and colour as the assigned station colour
                     hover_name="City", color='Colour', color_discrete_sequence=["goldenrod", "blue", "red","green"] )
 
     # Fits the view around the input data

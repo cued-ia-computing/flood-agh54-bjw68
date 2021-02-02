@@ -56,29 +56,40 @@ def polyfit(dates, levels, p):
 
 
 def flow_range(stations):
+    """Output list of colours for each station, each denoting a water level"""
+    #Update water levels
     update_water_levels(stations)
+
+    #Initialise colour list
     colours = []
+
+
     for station in stations:
+        #Create water level variables
         current_level = station.latest_level 
         flow_r = station.typical_range
 
-
+        #If the data is missing, set the colour as red
         if current_level == None or station.typical_range == None:
             colour = "red"
             colours.append(colour)
 
+        #If the current level is below the typical low, set colour as green
         elif current_level <= flow_r[0]:
             colour = "green"
             colours.append(colour)
 
+        #If the current level is within the typical range, set colour as blue
         elif flow_r[0] < current_level < flow_r[1]:
             colour = "blue"
             colours.append(colour)
         
+        #If the current level is above the typical high, set colour as goldenrod
         elif current_level >= flow_r[1]:
             colour = "goldenrod"
             colours.append(colour)
 
+    #Return colour list
     return colours
 
 
