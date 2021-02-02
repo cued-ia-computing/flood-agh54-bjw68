@@ -11,6 +11,7 @@ import plotly.express as px
 import geopandas
 import pandas as pd
 from haversine import haversine, Unit
+from .analysis import flow_range
 
 
 def rivers_with_station(stations):
@@ -117,9 +118,12 @@ def map_station(stations):
         coordy.append(station.coord[1])
         name.append(station.name)
     
+    colour = flow_range(stations)
+
     # Creates a dataframe of names and coordinates
     df = pd.DataFrame(
     {'City': name,
+     'Colour': colour,
      'Latitude': coordx,
      'Longitude': coordy})
 
@@ -135,7 +139,7 @@ def position_plotter(geodf):
     fig = px.scatter_geo(geodf,
                     lat=geodf.geometry.y,
                     lon=geodf.geometry.x,
-                    hover_name="City", )
+                    hover_name="City", color='Colour', color_discrete_sequence=["goldenrod", "blue", "red","green"] )
 
     # Fits the view around the input data
     fig.update_geos(fitbounds="locations")

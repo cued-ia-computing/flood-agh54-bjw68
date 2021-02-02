@@ -11,10 +11,15 @@ def current_highest_stations(stations, number):
     highest_stations = []
     update_water_levels(stations)
 
+    
+    checked_list = []
     for station in stations:
         #If the station has a valid water level, add tuple of name and water level
-        if station.latest_level != None and station.latest_level < 1000:
+        if station.latest_level != None and station.latest_level < 1000 and station.name not in checked_list:
             highest_stations.append((station, station.latest_level))
+
+            #List to stop duplicates
+            checked_list.append(station.name)
     
     #Sort the list by water level
     highest_stations_sort = sorted(highest_stations, key=lambda x: x[1], reverse=True)
@@ -48,3 +53,34 @@ def polyfit(dates, levels, p):
 
     #Return plot to be plotted
     return plt
+
+
+def flow_range(stations):
+    update_water_levels(stations)
+    colours = []
+    for station in stations:
+        current_level = station.latest_level 
+        flow_r = station.typical_range
+
+
+        if current_level == None or station.typical_range == None:
+            colour = "red"
+            colours.append(colour)
+
+        elif current_level <= flow_r[0]:
+            colour = "green"
+            colours.append(colour)
+
+        elif flow_r[0] < current_level < flow_r[1]:
+            colour = "blue"
+            colours.append(colour)
+        
+        elif current_level >= flow_r[1]:
+            colour = "goldenrod"
+            colours.append(colour)
+
+    return colours
+
+
+
+
