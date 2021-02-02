@@ -24,4 +24,4 @@ def plot_water_levels(station, dates, levels):
     plt.title("Station: {}".format(str(station.name)))
 
     plt.tight_layout()
-    plt.show()
+    return plt
