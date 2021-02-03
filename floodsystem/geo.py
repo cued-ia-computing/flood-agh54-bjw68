@@ -142,7 +142,7 @@ def position_plotter(geodf):
                     lon=geodf.geometry.x,
 
                     #Set the label as station name, and colour as the assigned station colour
-                    hover_name="City", color='Colour', color_discrete_sequence=["goldenrod", "blue", "red","green"] )
+                    hover_name="City", color='Colour', color_discrete_sequence=["goldenrod", "blue", "red", "green"] )
 
     # Fits the view around the input data
     fig.update_geos(fitbounds="locations")

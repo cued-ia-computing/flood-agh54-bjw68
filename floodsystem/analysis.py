@@ -91,7 +91,3 @@ def flow_range(stations):
 
     #Return colour list
     return colours
-
-
-
-

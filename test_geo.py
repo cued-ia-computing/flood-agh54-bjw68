@@ -93,13 +93,23 @@ def test_map_station():
     # Checks the coordinate lists is the same length as the input data
     assert len(pos.geometry.x) <= len(test_data)
 
-    # Checks the coordinate list and town list are same length
+    # Checks the coordinate list and name list are same length
     assert len(pos.geometry.x) == len(pos['City'])
+
+    # Checks the coordinate list and colour list are same length
+    assert len(pos.geometry.x) == len(pos['Colour'])
 
     # Checks the cities are string and are not empty
     for city in pos['City']:    
         assert city != None
         assert type(city) == str
+
+    # Checks the cities are string and are not empty
+    colour_list = ["goldenrod", "blue", "red", "green"]
+    for colour in pos['Colour']:    
+        assert colour != None
+        assert type(colour) == str
+        assert colour in colour_list
 
 
 def test_position_plotter():
@@ -107,6 +117,7 @@ def test_position_plotter():
     pos = map_station(test_data)
     # Checks we an call the plotter
     plot = position_plotter(pos)
+    return plot
 
 def test_stations_by_distance():
     test_data = sampledata()
