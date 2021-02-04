@@ -11,7 +11,7 @@ import plotly.express as px
 import geopandas
 import pandas as pd
 from haversine import haversine, Unit
-from .analysis import flow_range
+from .analysis import flow_range_colours
 
 
 def rivers_with_station(stations):
@@ -119,7 +119,7 @@ def map_station(stations):
         name.append(station.name)
     
     #Get the respective colours for our station list
-    colour = flow_range(stations)
+    colour = flow_range_colours(stations)
 
     # Creates a dataframe of names, coordinates and colours
     df = pd.DataFrame(

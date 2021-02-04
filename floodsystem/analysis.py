@@ -55,7 +55,7 @@ def polyfit(dates, levels, p):
     return plt
 
 
-def flow_range(stations):
+def flow_range_colours(stations):
     """Output list of colours for each station, each denoting a water level"""
     #Update water levels
     update_water_levels(stations)
