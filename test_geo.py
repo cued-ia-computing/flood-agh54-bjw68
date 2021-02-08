@@ -149,6 +149,9 @@ def test_stations_within_radius():
     test_value2 = 250
     stations = stations_within_radius(test_data, test_value1, test_value2)
 
+    # Check length from code matches manual compute of data
+    assert len(stations) == 3
+
     for station in stations:
         # Checks that the list stores strings
         assert type(station) == str
