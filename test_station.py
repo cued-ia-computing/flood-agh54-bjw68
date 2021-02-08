@@ -21,6 +21,12 @@ def test_inconsistent_typical_range_stations():
     
     # Checks that the data function gets the same answer as a manual test
     assert stations == manual_answer
+
+def test_typical_range_consistent():
+    # This is a very simple function so we will test by calling the function
+    test_data = sampledata()
+    assert test_data[0].typical_range_consistent() == False
+    assert test_data[1].typical_range_consistent() == True
     
 
 def test_create_monitoring_station():
