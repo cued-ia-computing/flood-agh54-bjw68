@@ -55,7 +55,7 @@ def stations_by_river(stations):
     return rivers_dict
 
 def rivers_by_station_number(stations, N):
-    """Create a dictionary of stations and corresponding number"""
+    """Create a list of stations and corresponding number of monitoring stations"""
 
     # Initialise station list and container for all rivers
     river_stations = stations_by_river(stations)

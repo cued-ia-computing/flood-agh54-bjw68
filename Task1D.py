@@ -13,7 +13,8 @@ def run():
 
     # Display data from 10 rivers:
     river_display = rivers[:10]
-    print('The ten first rivers are {}' .format(river_display))
+    number_of_rivers = len(rivers)
+    print('There are {} rivers with at least one station. The first ten rivers are {}' .format(number_of_rivers, river_display))
 
     # Create River dictionary
     river_stations = stations_by_river(stations)
