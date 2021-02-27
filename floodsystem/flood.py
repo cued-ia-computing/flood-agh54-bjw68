@@ -7,7 +7,9 @@ def stations_level_over_threshold(stations, tol):
 
     # iterates through the list and adds a stationif its data is consistent and its above the tolerance
     for station in stations:
-        if station.typical_range_consistent() == False or station.relative_water_level() == None:
+        if station in flood:
+            pass
+        elif station.typical_range_consistent() == False or station.relative_water_level() == None:
             pass
         elif station.relative_water_level() > tol:
                 data = (station, station.relative_water_level())
@@ -23,7 +25,9 @@ def stations_highest_rel_level(stations, N):
 
     # iterates through the list and adds a stationif its data is consistent and its above the tolerance
     for station in stations:
-        if station.typical_range_consistent() == False or station.relative_water_level() == None:
+        if station in flood:
+            pass
+        elif station.typical_range_consistent() == False or station.relative_water_level() == None:
             pass
         else:
             data = (station, station.relative_water_level())

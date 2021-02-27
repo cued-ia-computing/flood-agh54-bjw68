@@ -6,6 +6,7 @@
 from floodsystem.station import MonitoringStation
 from floodsystem.station import inconsistent_typical_range_stations
 from floodsystem.station import sampledata
+from floodsystem.stationdata import update_water_levels
 
 def test_inconsistent_typical_range_stations():
     test_data = sampledata()
@@ -28,6 +29,13 @@ def test_typical_range_consistent():
     assert test_data[0].typical_range_consistent() == False
     assert test_data[1].typical_range_consistent() == True
     
+def test_relative_water_level():
+    # This is a very simple function so we will test by calling the functions
+    test_data = sampledata()
+    update_water_levels(test_data)
+    for data in test_data:
+        data.relative_water_level()
+
 
 def test_create_monitoring_station():
 
