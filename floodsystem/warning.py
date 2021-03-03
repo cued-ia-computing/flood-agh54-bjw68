@@ -15,7 +15,6 @@ import numpy as np
 def highest_water_level(dates, levels, p, days):
     """Outputs the predicted highest water level for a station"""
 
-
     #Convert the date into a number and add to new dates list
     dates_num = []
     for date in dates:
@@ -24,14 +23,14 @@ def highest_water_level(dates, levels, p, days):
     #Find polynomial coefficents using shifted dates, historic water levels and desired polynomial order
     p_coeff = np.polyfit(dates_num - dates_num[0], levels, p)
 
-
     #Creates polynomial using the produced coefficient
     poly = np.poly1d(p_coeff)
 
     # list of future dates
     future_dates = []
     for i in range(4*24*days):
-        future_dates.append(dates_num[i]+days)
+        future_dates.append(dates_num[0]+(dates_num[0]-dates_num[(4*24*days)-i]))
+
     
     #Create a new list of date spaces for plotting
     x1 = np.linspace(future_dates[0], future_dates[-1], 30)
@@ -47,7 +46,7 @@ def highest_water_level(dates, levels, p, days):
     return highest_average
 
 # This function creates a list of stations with their highest level
-def towns_and_levels(stations, p, days):
+def towns_and_levels(stations, p, days, dt):
     # creates an empty list
     data = []
 
@@ -73,6 +72,7 @@ def towns_and_levels(stations, p, days):
     #return data
     return data
 
+
 # This function returns a list of towns at severe risk of flooding
 def flood_warning(towns_levels, severe, high, moderate, low):
     # first we remove towns where there is a duplicate, keeping the higher value of relative level
@@ -80,34 +80,30 @@ def flood_warning(towns_levels, severe, high, moderate, low):
     #sort in decending order
     sorted_by_level = sorted_by_key(towns_levels, 1, reverse=True)
 
-    # initilise a list
-    towns_with_levels = []
-
-    # iterate through sorted list, adding only new towns
-    for town in sorted_by_level:
-        if town[0] in towns_with_levels:
-            pass
-        else:
-            towns_with_levels.append(town)
-    
-    # now the list of stations is sorted into four lists, reperesenting the levels of flood risk
-    
     #initialise the lists
     severe_risk = []
     high_risk = []
     moderate_risk = []
     low_risk = []
 
-    #iterate through the list and add the town to its corresponding risk level:
-    for town in towns_with_levels:
-        if town[1] >= severe:
+    # iterate through sorted list, adding only new towns
+    for town in sorted_by_level:
+        if town[0] in severe_risk:
+            break
+        elif town[1] > severe:
             severe_risk.append(town)
-        elif town[1] >= high:
+        elif town[0] in high_risk:
+            break
+        elif town[1] > high:
             high_risk.append(town)
-        elif town[1] >=  moderate:
+        elif town[0] in moderate_risk:
+            break
+        elif town[1] > moderate:
             moderate_risk.append(town)
+        elif town[0] in low_risk:
+            break
         else:
             low_risk.append(town)
-    
+
     # only the towns at severe risk need to be returned, hence:
-    return severe_risk
+    return severe_risk, high_risk
