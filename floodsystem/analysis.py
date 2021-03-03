@@ -38,21 +38,17 @@ def polyfit(dates, levels, p):
     for date in dates:
         dates_num.append(matplotlib.dates.date2num(date))
 
+
     #Find polynomial coefficents using shifted dates, historic water levels and desired polynomial order
     p_coeff = np.polyfit(dates_num - dates_num[0], levels, p)
 
     #Creates polynomial using the produced coefficient
     poly = np.poly1d(p_coeff)
 
-    #Create a new list of date spaces for plotting
     x1 = np.linspace(dates_num[0], dates_num[-1], 30)
+    prediction = poly(x1 - dates_num[0])
 
-    #Plot the polynomial fit, calculated at shifted time values, against the time values
-    plt.plot(x1, poly(x1 - dates_num[0]))
-    plt.tight_layout()
-
-    #Return plot to be plotted
-    return plt
+    return x1, prediction
 
 
 def flow_range_colours(stations):
