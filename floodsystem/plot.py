@@ -40,7 +40,7 @@ def plot_water_levels(station, dates, levels):
 
 
 
-def plot_water_levels_with_fit(station, dates, levels, p):
+def plot_water_level_with_fit(station, dates, levels, p):
     """Plot water level with time"""
 
     #Create  variables for low and high range

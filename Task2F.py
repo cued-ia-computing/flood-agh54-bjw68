@@ -1,6 +1,6 @@
 from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.stationdata import build_station_list
-from floodsystem.plot import plot_water_levels_with_fit
+from floodsystem.plot import plot_water_level_with_fit
 from floodsystem.analysis import current_highest_stations, polyfit
 import datetime
 
@@ -23,7 +23,7 @@ def run():
         dates, levels = fetch_measure_levels(station_nom.measure_id, dt=datetime.timedelta(days=dt))
 
         #Pass the information to the polynomial plotting function
-        plot = plot_water_levels_with_fit(station_nom, dates, levels, 3)
+        plot = plot_water_level_with_fit(station_nom, dates, levels, 3)
 
         #Output the graph for each river
         plot.show()

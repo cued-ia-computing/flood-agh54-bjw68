@@ -24,8 +24,8 @@ def run():
         #Pass the information to the plotting function
         plot = plot_water_levels(station_nom, dates, levels)
 
-    #Plot the graphs for the top 5 stations
-    plot.show()
+        #Plot the graphs for the top 5 stations
+        plot.show()
 
 
 if __name__ == "__main__":
