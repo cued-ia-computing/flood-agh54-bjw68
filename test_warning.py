@@ -4,8 +4,10 @@ from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.station import sampledata
 import datetime
 
-def test_highest_water_level():
+"""Unit test for the warning module"""
 
+def test_highest_water_level():
+    """Test for highest_water_level function"""
     test_data = build_station_list()
     dt=10
     dates, levels = fetch_measure_levels(test_data[1].measure_id, dt=datetime.timedelta(days=dt))
@@ -15,7 +17,7 @@ def test_highest_water_level():
     highest_water_level(dates, levels, p, days)
 
 def test_towns_and_levels():
-
+    """Test for towns_and_levels function"""
     test_data = build_station_list()
     dt=10
     p = 4
@@ -24,7 +26,7 @@ def test_towns_and_levels():
     assert type(towns_and_levels(test_data[:5], p, days, dt)) == list
 
 def test_flood_warning():
-
+    """Test for flood_warning function"""
     test_data = build_station_list()
     dt=10
     p = 4

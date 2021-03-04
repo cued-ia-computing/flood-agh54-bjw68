@@ -4,7 +4,7 @@ from floodsystem.flood import stations_highest_rel_level
 from floodsystem.flood import stations_level_over_threshold
 
 def test_stations_highest_rel_level():
-
+    """Test for stations_highrst_rel_level function"""
     test_data = sampledata()
 
     # add a latest level to the sample data
@@ -21,7 +21,7 @@ def test_stations_highest_rel_level():
     assert output[2][0].name == 'Scurf Dyke'
 
 def test_stations_level_over_threshold():
-
+    """Test for stations_level_over_threshold function"""
     test_data = sampledata()
 
     # add a latest level to the sample data

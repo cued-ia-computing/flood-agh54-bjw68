@@ -75,6 +75,7 @@ def test_rivers_by_station_number():
 
 
 def test_map_station():
+    """Test for map_station function"""
     test_data = sampledata()
     pos = map_station(test_data)
     
@@ -113,6 +114,7 @@ def test_map_station():
 
 
 def test_position_plotter():
+    """Test for position_plotter function"""
     test_data = sampledata()
     pos = map_station(test_data)
     # Checks we an call the plotter
@@ -120,6 +122,7 @@ def test_position_plotter():
     return plot
 
 def test_stations_by_distance():
+    """Test for stations_by_distance function"""
     test_data = sampledata()
     test_value = 52.2053, 0.1218
     stations = stations_by_distance(test_data, test_value)
@@ -144,6 +147,7 @@ def test_stations_by_distance():
     assert len(stations) < len(test_data)
 
 def test_stations_within_radius():
+    """Test for stations_within_radius function"""
     test_data = sampledata()
     test_value1 = 52.2053, 0.1218
     test_value2 = 250
