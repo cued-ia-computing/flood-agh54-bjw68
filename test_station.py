@@ -4,6 +4,37 @@
 """Unit test for the station module"""
 
 from floodsystem.station import MonitoringStation
+from floodsystem.station import inconsistent_typical_range_stations
+from floodsystem.station import sampledata
+from floodsystem.stationdata import update_water_levels
+
+def test_inconsistent_typical_range_stations():
+    test_data = sampledata()
+    stations = inconsistent_typical_range_stations(test_data)
+    manual_answer = ['Leeds Killingbeck Dam', 'Loftsome Bridge', 'Upton']
+
+    # Checks the list entrys are strings
+    for station in stations:
+        assert type(station) == str
+
+    #Checks duplicates have been removed
+    assert len(stations) == 3
+    
+    # Checks that the data function gets the same answer as a manual test
+    assert stations == manual_answer
+
+def test_typical_range_consistent():
+    # This is a very simple function so we will test by calling the function
+    test_data = sampledata()
+    assert test_data[0].typical_range_consistent() == False
+    assert test_data[1].typical_range_consistent() == True
+    
+def test_relative_water_level():
+    # This is a very simple function so we will test by calling the functions
+    test_data = sampledata()
+    update_water_levels(test_data)
+    for data in test_data:
+        data.relative_water_level()
 
 
 def test_create_monitoring_station():

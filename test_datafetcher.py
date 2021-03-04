@@ -10,7 +10,7 @@ from floodsystem.stationdata import build_station_list
 
 
 def test_build_station_list():
-
+    """Test for build_station_list function"""
     # Build list of stations
     stations = build_station_list()
 
